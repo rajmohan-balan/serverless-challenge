@@ -1,0 +1,37 @@
+service: ${env:SERVICE_NAME}
+ 
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: ap-southeast-2
+  stage: ${env:ENV}
+  stackTags:
+    FRAMEWORK: serverless
+
+functions:
+  setRoles:
+    description: ${env:DESC}
+    handler: src/handler.setRoles
+    timeout: 300
+    warmup: true
+    events:
+      - http: POST setRoles
+  setUsers:
+    description: ${env:DESC}
+    handler: src/handler.setUsers
+    timeout: 300
+    warmup: true
+    events:
+      - http: POST setUsers
+  getSubOrdinates:
+    description: ${env:DESC}
+    handler: src/handler.getSubOrdinates
+    timeout: 300
+    warmup: true
+    events:
+      - http: POST getSubOrdinates
+
+plugins:
+  - serverless-offline-python

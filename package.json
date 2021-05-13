@@ -1,0 +1,11 @@
+{
+  "name": "serverless-challenge",
+  "version": "1.0.0",
+  "description": "Accepts payload",
+  "author": "rajmohanbalan",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-offline-python": "^3.22.2"
+  }
+}

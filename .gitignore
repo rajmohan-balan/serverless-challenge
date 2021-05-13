@@ -1,0 +1,12 @@
+**/.DS_Store
+.env*
+!.env.template
+!.env.example
+**/.DS_Store
+package/
+venv/
+python_modules/
+node_modules/
+node_modules.zip
+.serverless*
+*.pyc

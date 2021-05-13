@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  serverless:
+    image: rajmohanbalan/serverless
+    env_file: .env
+    environment:
+      # Overwrite the container's PATH to add python_modules
+      PATH: "/opt/app/python_modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      PYTHONPATH: /opt/app/src
+    volumes:
+      - ~/.aws:/root/.aws:Z
+      - .:/opt/app:Z
+
+  # Build python artifact
+  lambda-build:
+    image: lambci/lambda:build-python3.6
+    env_file: .env
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app:Z
+
+  # Execute lambda function locally
+  lambda:
+    image: lambci/lambda:python3.6
+    env_file: .env
+    volumes:
+      - ./package:/var/task:Z
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://127.0.0.1:12201"
