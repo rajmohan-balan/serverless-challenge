@@ -5,9 +5,6 @@ from libs.roles import roles
 
 class users(roles):
 
-    def __init__(self, event_type=''):
-        self.type = event_type
-
     def _load_json(self, json_path):  # pragma: no cover
         with open(json_path) as f:
             return json.load(f)

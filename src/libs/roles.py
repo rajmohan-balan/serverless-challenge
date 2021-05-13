@@ -4,9 +4,6 @@ from pathlib import Path
 
 class roles:
 
-    def __init__(self, event_type=''):
-        self.type = event_type
-
     def _load_json(self, json_path):
         with open(json_path) as f:  # pragma: no cover
             return json.load(f)
@@ -31,9 +28,9 @@ class roles:
     def getRoleById(self, Id):  # pragma: no cover
         roles = self._load_json(ROLES_STORAGE)
         parsed_roles = self.__parse(roles['body'])
-        for cdict in parsed_roles:
-            if cdict["Id"] == Id:
-                return cdict
+        for role in parsed_roles:
+            if role["Id"] == Id:
+                return role
 
 
 # constants
